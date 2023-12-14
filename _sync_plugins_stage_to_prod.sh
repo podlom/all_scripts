@@ -9,7 +9,8 @@ STAGING_SERVER="asianlegacystg.ssh.wpengine.net"
 PROD_SERVER="asianlegacylib.ssh.wpengine.net"
 STAGING_DIR="/nas/content/live/asianlegacystg/wp-content/plugins/"
 LOCAL_DIR="/home/shkodenko.t/_bk/2023_all/all_wpengine/stage/wp-content/"
-PROD_DIR="/nas/content/live/asianlegacylib/wp-content/plugins/"
+LOCAL_DIR_PLUGINS="${LOCAL_DIR}plugins"
+PROD_DIR="/nas/content/live/asianlegacylib/wp-content/"
 
 
 echo "Sync WP theme from stage to prod has started at:"
@@ -38,7 +39,7 @@ fi
 
 # Step 3: Sync from Local backup directory to Production
 echo "3. Sync from Local backup directory to Production..."
-rsync -avz --progress $LOCAL_DIR $PROD_SERVER:$PROD_DIR
+rsync -avz --progress $LOCAL_DIR_PLUGINS $PROD_SERVER:$PROD_DIR
 date
 
 # Check if rsync was successful
