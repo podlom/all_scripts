@@ -45,14 +45,14 @@ tar cpjvf "${DB_BACKUP_PATH}/${TAR_BACKUP_NAME}" "${DB_BACKUP_PATH}/${DB_BACKUP_
 ls -alh "${DB_BACKUP_PATH}"
 
 
-# Pass log file name sswith a prod SQL dump file name in it
-# Check if an argument was provided
+# Pass sql.tar.bz2 file name with a prod SQL dump file name in it
+# Check if a required argument was provided
 if [ "$#" -ne 1 ]; then
-    echo "Error. Usage: $0 /path/to/your/file.sql.tar.bz2"
+    echo "Error. Usage: $0 /path/to/your/prod-backup-file.sql.tar.bz2"
     exit 1
 fi
 
-# The first required argument is the dump.sql.tar.bz2 file name
+# The first required argument is the prod-backup-file.sql.tar.bz2 archive file name
 FILE_PATH="$1"
 
 # Check if the file exists
@@ -77,7 +77,9 @@ if [ -f "${DB_BACKUP_PATH}/${FILE_PATH}" ]; then
         date
     else
         echo "Error: The file at path '${DB_RESTORE_REMOTE_PATH}/${STRIPPED_NAME}' does no exists."
+        exit 1
     fi
 else
     echo "Error: The file at path '${DB_RESTORE_REMOTE_PATH}/${FILE_PATH}' does not exist."
+    exit 1
 fi
